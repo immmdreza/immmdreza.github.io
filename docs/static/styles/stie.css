@@ -1,0 +1,40 @@
+@import url('fonts/static/FiraCode-Medium.ttf');
+
+@font-face {
+    font-family: yekan;
+    src: url('fonts/Yekan/yekan-regular.eot');
+    src: url('fonts/Yekan/yekan-regular.eot?#iefix') format('FontName-opentype'),
+         url('fonts/Yekan/yekan-regular.woff') format('woff'),
+         url('fonts/Yekan/Yekan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+    font-family: 'Fira Code', monospace;
+}
+
+.farsi {
+    font-family: 'yekan', 'Fira Code', monospace;
+    text-align: right;
+}
+
+.en {
+    font-family: 'Fira Code', monospace;
+    text-align: left;
+}
+
+.terminal {
+    font-family: 'Fira Code', monospace;
+    background-color: black;
+    color:azure;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.nice {
+    border-radius: 10px;
+}

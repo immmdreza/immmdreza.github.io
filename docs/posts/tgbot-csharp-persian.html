@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/styles/stie.css" rel="stylesheet">
+    <link href="../static/prism/prism.css" rel="stylesheet" />
+
+
+    <title>Telegram bot C# Persian</title>
+  </head>
+  <body>
+    <div class="container-md">
+        <h1 class="mt-5 farsi" dir="rtl">🤖 آموزش ساخت ربات تلگرام در سی شارپ</h1>
+        <hr/>
+        <div class="alert alert-warning farsi" dir="rtl" role="alert">
+            توجه داشته باشید این مقاله و همینطور کتابخانه مورد استفاده  (<a target="blank" href="https://github.com/immmdreza/ModernTelegramBot">ModernTelegramBot</a>) ، همگی بر اساس کتابخوانه  <a target="blank" href="https://github.com/TelegramBots/Telegram.Bot">Telegram.Bot</a> نوشته شده اند.
+        </div>
+
+        <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header farsi" dir="rtl" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <b>📋 موازد موزد نیاز</b>
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body farsi" dir="rtl">
+                  <h3>موارد زیر رو باید روی سیستمتون نصب داشته باشید:</h3>
+                  <small><b>این آموزش بر اساس سیستم عامل ویندوز نوشته شده، اما برای سایر هم با کمی تفاوت قابل انجامه</b></small>
+                  <hr />
+                  <ul>
+                    <li>
+                      <p><a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">Build apps - SDK (software development kit) for .Net Core 3.1</a></p>
+                      <small>این ابزار برای پیکربندی و اجرای کد های سی شارپ در بستر .Net Core مورد استفاده قرار می گیره</small>
+                    </li>
+                    <p>برای بررسی نصب بودن این ابزار توسعه برنامه، دستور زیر را در در کامند لاین (Command Line) ویندوز اجرا کنید.</p>
+                    <div class="terminal">dotnet --version</div>
+                    <p>اگه برنامه نصب شده باشه در جواب ورژن نصب شده رو می بینید.</p>
+                    <br />
+                    <li>
+                      <p><a href="https://code.visualstudio.com/Download">Visual Studio Code</a></p>
+                      <small>برنامه ویرایش متن قدرت مند که در این آموزش استفاده شده .</small>
+                      <p><small>برای سی شارپ می شه از visual studio هم استفاده کرد.</small></p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header farsi" dir="rtl" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  ⭐ نوشتن اولین کد در سی شارپ
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body farsi" dir="rtl">
+                  <h3>در ابتدا یک پروژه ساده سی شارپ ایجاد کرده و ران می کنیم</h3>
+                  <hr />
+                  <p>برای شروع وارد برنامه vscode (visual studio code) بشید.</p>
+                  <p>از نوار بالا بر روی File کلیک کنید و بعد Open Folder رو انتخاب کنید.</p>
+                  <p>پوشه ای جدید به نام hello_cs ایجاد کرده و انتخاب کنید، و بعد بر روی Select folder کلیک کنید.</p>
+                  <p>بعد از باز شدن پوشه hello_cs در ادیتور، از نوار بالا یک ترمینال جدید ایجاد می کنیم.</p>
+                  <p class="en"><b>Terminal -> New Terminal</b></p>
+                  <p>در ترمینال باز شده دستور زیر را اجرا کنید:</p>
+                  <div class="terminal">dotnet new console</div>
+                  <p>منتظر بمانید تا فرایند کامل شود.</p>
+                  <p>بعد از تکمیل فرایند، احتمالا سه فایل ایجاد شده در پوشه را مشاهده خواهید کرد.</p>
+                  <img src="../static/other/Screenshot 2021-01-08 200831.png" class="img-fluid mb-3" alt="...">
+                  <p>تمامی فایل ها و پوشه های ایجاد شده برای برنامه ما ضروری می باشند، اما در حال حاضر ما تنها با فایل Program.cs کار خواهیم داشت.</p>
+                  <p>فایل Program.cs را داخل ادیتور باز کرده و کدهای داخل آنرا مشاهده کنید:</p>
+                  <pre class="nice"><code class="language-cs">
+using System;
+
+namespace hello_cs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}</code></pre>
+                  <p>کد بالا ساده ترین کدی است که می توان در سی شارپ در نسخه فعلی نوشت.</p>
+                  <p>شروع اجرای کد از داخل تابع Main میباشد:</p>
+                  <pre class="nice"><code class="language-cs">Console.WriteLine("Hello World!")</code></pre>
+                  <p>این بخش از کد با استفاده از کلاس استاتیک Console و تابع WriteLine، متن <span dir="ltr">Hello World!</span> را در کنسول چاپ می کند.</p>
+                  <p><b>برای اجرای برنامه دستور زیر را در کنسول اجرا کنید.</b></p>
+                  <div class="terminal">dotnet run</div>
+                  <p>و مشاهده خواهید کرد که Hello World در ترمینال چاپ شده است.</p>
+                  <div class="terminal" dir="ltr">
+                    C:\Project\hello_cs>dotnet run<br />
+                    Hello World!
+                  </div>
+                  <p>تبریک!! اولین برنامه رو داخل سی شارپ اجرا کردی 🍕</p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  Accordion Item #3
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+
+    <script src="../static/prism/prism.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
