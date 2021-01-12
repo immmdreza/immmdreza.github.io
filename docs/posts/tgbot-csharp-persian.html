@@ -159,25 +159,102 @@ namespace hello_cs
                 <div class="accordion-body farsi" dir="rtl">
                   <h3>در این بخش برای ارتباط با api تلگرام یک api token می سازیم:</h3>
                   <small><b>برای دریافت api token بایستی یک اکانت ربات ساخته و api token مربوط به آن را دریاف می کنیم.</b></small>
+                  <hr />
+                  <p>برای ساختن اکانت ربات تلگرام و دریافت توکن، ابتدا به ربات تلگرام <a dir="ltr" href="https://t.me/BotFather">@BotFather</a> مراجعه کنید.</p>
+                  <p>پس از مراجعه به ربات و استارت کردن آن، ابتدا دستور <span dir="lrt">/newbot</span> را برای ساختن ربات جدید ارسال کیند.</p>
+                  <p>پس از ارسال دستور بالا، ربات از شما می خواهد که نامی برای ربات خود انتخاب کرده و ارسال کنید (این نام را می توانید در آینده تغییر دهید).</p>
+                  <p>پس از وارد کردن نام، ربات از شما می خواهد که یک نام کاربری برای ربات خود انتخاب و ارسال کنید.</p>
+                  <small>توجه داشته باشید نام کاربری ربات قابل تغییر نمی باشد.</small>
+                  <p>پس از وارد کردن نام کاربری معتبر، ربات توکن ربات جدید شما را در پیامی مانند زیر ارسال خواهد کرد.</p>
+                  <div class="terminal" dir="ltr">
+                    <p>Done! Congratulations on your new bot. You will find it at t.me/trainings_tsww_website_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.</p>
+
+                    <p>Use this token to access the HTTP API:<br />
+                      <code>123456789:AAG-hgsdjkfsiudfyuieasgfiuaqoiis</code>
+                    </p>
+                    <p>Keep your token secure and store it safely, it can be used by anyone to control your bot.</p>
+                    
+                    <p>For a description of the Bot API, see this page: https://core.telegram.org/bots/api</p>
+                  </div>
+                  <p>در این پیام، توکن ربات شما <code>123456789:AAG-hgsdjkfsiudfyuieasgfiuaqoiis</code> می باشد.</p>
+                  <p><b>توجه داشته باشید که این توکن را با کسی به اشتراک نگذارید.</b></p>
+                  <p>در این مرحله، جسم ربات را ساختیم. برای بخشیدن روح به ربات بایستی به سمت کدی که نوشته ایم بر گردیم.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header farsi" dir="rtl" id="flush-heading2Two">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2Two" aria-expanded="false" aria-controls="flush-collapse2Two">
-                  #2
+                  <b>🔗 راه اندازی ربات به وسیله سی شارپ</b>
                 </button>
               </h2>
               <div id="flush-collapse2Two" class="accordion-collapse collapse" aria-labelledby="flush-heading2Two" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body farsi" dir="rtl">
-                  Not Yet.
+                  <h3>در این بخش با کمک سی شارپ ربات را راه می اندازیم.</h3>
+                  <hr />
+                  <p>برای ادامه به کدی که قبلا نوشته بودیم بر می گردیم.</p>
+                  <p>اگر همراه آموزش پیش رفته باشید، هم اکنون کتابخوانه لازم برای ارتباط با ربات را نیز به پروژه اضافه کرده اید.</p>
+                  <p>در حال حاضر فایل Program.cs در پروژه شما باید بصورت زیر باشد.</p>
+                  <pre class="nice"><code class="language-cs">
+using System;
+
+namespace hello_cs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}</code></pre>
+                  <p>برای شروع، تمامی کد های داخل فایل Program.cs را با کد های زیر جایگزین کنید:</p>
+                  <pre class="nice"><code class="language-cs">
+using System;
+using Telegram.Bot;
+
+namespace hello_cs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var bot = new TelegramBotClient("API_TOKEN");
+
+            Console.WriteLine($"Hello i'm {bot.BotInfo.FirstName}, my username is {bot.BotInfo.Username}");
+        }
+    }
+}</code></pre>
+                  <h5>به توضیح کد بالا می پردازیم:</h5>
+                  <pre class="nice"><code class="language-cs">using Telegram.Bot;</code></pre>
+                  <p>در این بخش به برنامه گقتیم که یکی از کلاس های داخل فضای نام (namespace)، Telegram.Bot را نیاز داریم.</p>
+                  <p>در این بخش می توان فرض کرد فضای نام همان پوشه هاست، بعنوان مثال: پوشه Bot از پوشه Telegram. البته در واقعیت همیشه اینگونه نیست.</p>
+                  <hr />
+                  <pre class="nice"><code class="language-cs">var bot = new TelegramBotClient("API_TOKEN");</code></pre>
+                  <p>در این بخش یک نمونه از روی کلاس TelegramBotClient، که از فضای نام Telegram.Bot استخراج شده، ساخته و توکنی که از ربات BotFather دریافت کرده این را به آن پاس می دهیم.</p>
+                  <p>بناراین در این بخش باید توکن ربات خود را با عبارت API_TOKEN در کد بالا جایگزین کنید. چیزی مشابه با کد زیر:</p>
+                  <pre class="nice"><code class="language-cs">var bot = new TelegramBotClient("123456789:AAG-hgsdjkfsiudfyuieasgfiuaqoiis");</code></pre>
+                  <hr />
+                  <pre class="nice"><code class="language-cs">Console.WriteLine($"Hello i'm {bot.BotInfo.FirstName}, my username is {bot.BotInfo.Username}");</code></pre>
+                  <p>در اخر با استفاده از ویژگی BotInfo از نمونه ساخته شده (bot)، نام و نام کاربری که برای ربات انتخاب کرده بودید را در کنسول نمایش می دهیم.</p>
+                  <hr />
+                  <h5>اجرای برنامه</h5>
+                  <p>جهت اجرای کدی که نوشتیم دستور زیر را در کنسول وارد کنید.</p>
+                  <div class="terminal" dir="ltr">
+                    dotnet run
+                  </div>
+                  <p>و خروجی ای مشابه زیر را مشاهده خواهید کرد:</p>
+                  <div class="terminal" dir="ltr">
+                    Hello i'm Parasite, my username is Parasiticbot
+                  </div>
+                  <p>تا این مرحله شما با موفقیت مشخصات ربات خود را به کمک برنامه دریافت کردید.</p>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header farsi" dir="rtl" id="flush-heading3Three">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3Three" aria-expanded="false" aria-controls="flush-collapse3Three">
-                  #3
+                  <b>📬 پیام های ورودی به ربات</b>
                 </button>
               </h2>
               <div id="flush-collapse3Three" class="accordion-collapse collapse" aria-labelledby="flush-heading3Three" data-bs-parent="#accordionFlushExample">
