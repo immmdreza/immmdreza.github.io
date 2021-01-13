@@ -147,6 +147,7 @@ namespace hello_cs
           </div>
 
           <hr />
+          <hr />
 
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
@@ -193,7 +194,7 @@ namespace hello_cs
                   <h3>در این بخش با کمک سی شارپ ربات را راه می اندازیم.</h3>
                   <hr />
                   <p>برای ادامه به کدی که قبلا نوشته بودیم بر می گردیم.</p>
-                  <p>اگر همراه آموزش پیش رفته باشید، هم اکنون کتابخوانه لازم برای ارتباط با ربات را نیز به پروژه اضافه کرده اید.</p>
+                  <p>اگر همراه آموزش پیش رفته باشید، هم اکنون کتابخانه لازم برای ارتباط با ربات را نیز به پروژه اضافه کرده اید.</p>
                   <p>در حال حاضر فایل Program.cs در پروژه شما باید بصورت زیر باشد.</p>
                   <pre class="nice"><code class="language-cs">
 using System;
@@ -231,7 +232,7 @@ namespace hello_cs
                   <p>در این بخش می توان فرض کرد فضای نام همان پوشه هاست، بعنوان مثال: پوشه Bot از پوشه Telegram. البته در واقعیت همیشه اینگونه نیست.</p>
                   <hr />
                   <pre class="nice"><code class="language-cs">var bot = new TelegramBotClient("API_TOKEN");</code></pre>
-                  <p>در این بخش یک نمونه از روی کلاس TelegramBotClient، که از فضای نام Telegram.Bot استخراج شده، ساخته و توکنی که از ربات BotFather دریافت کرده این را به آن پاس می دهیم.</p>
+                  <p>در این بخش یک نمونه از روی کلاس TelegramBotClient، که از فضای نام Telegram.Bot استخراج شده، ساخته و توکنی که از ربات BotFather دریافت کرده ایم را به آن پاس می دهیم.</p>
                   <p>بناراین در این بخش باید توکن ربات خود را با عبارت API_TOKEN در کد بالا جایگزین کنید. چیزی مشابه با کد زیر:</p>
                   <pre class="nice"><code class="language-cs">var bot = new TelegramBotClient("123456789:AAG-hgsdjkfsiudfyuieasgfiuaqoiis");</code></pre>
                   <hr />
@@ -259,7 +260,99 @@ namespace hello_cs
               </h2>
               <div id="flush-collapse3Three" class="accordion-collapse collapse" aria-labelledby="flush-heading3Three" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body farsi" dir="rtl">
-                  Not Yet.
+                  <h3>خواندن پیام های جدید و جواب دادن به آن ها</h3>
+                  <hr />
+                  <p>کتابخانه فعلی که برای ارتباط با تلگرام استفاده کرده ایم، راهی ساده تر نسبت به کتابخانه مرجع برای دریافت پیام ها و سایر آپدیت های ارسالی به ربات را فراهم کرده است.</p>
+                  <p>برای دریافت آپدیت ها از هندلر استفاده می کنیم که درباره پیام ها MessageHandler می باشد.</p>
+                  <p>وظیفه اصلی هندلر، فیلتر کردن آپدیت های ورودی به ربات بر اساس خواسته ما و سپس فرستادن آنها به یک تابع برای انجام فرایند مورد نظر است.</p>
+                  <p>این به معنای آن است که که تمامی آپدیت های عبور کرده از فیلتر، تابعی که تایین کرده ایم را صدا زده و عملایتی که تعیین شده را انجام می دهند.</p>
+                  <p>به این توابع، توابع کالبک (CallBack) گفته می شود.</p>
+                  <p>پس همانطور که گقته شد، برای ساختن هندلر اول نیاز به تابع کالبک داریم</p>
+                  <p>تابعی بصورت زیر را تعریف می کنیم:</p>
+                  <p>اول مطمعن شوید تمامی فضای نام های زیر را در بالای کد خود فرا خوانده اید.</p>
+                  <pre class="nice"><code class="language-cs">
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Types;
+using Telegram.Filters;
+using Telegram.Handlers;</code></pre>
+                  <p>تابع زیر را در پایین تابع Main تعریف کنید.</p>
+                  <pre class="nice"><code class="language-cs">
+private static async Task CallBack(TelegramBotClient bot, Message message, Dictionary&ltstring, dynamic&gt data)
+{
+    await message.ReplyText($"You said: " + message.Text);
+}</code></pre>                 
+                  <p>نمای تابع بالا را بیاد داشته باشید، تقریبا تمامی توابع کالبک مورد نیاز در این کتابخانه به همین صورت ولی با بدنه متفاوت می باشند.</p>
+                  <p>شی message، همان پیام ورودی به ربات است، که با استفاده از تابع ReplyText() در جواب پیام همان متن پیام ورودی را ارسال کرده ایم.</p>
+                  <p>حال که تابع کالبک ما آماده است نوبت ساختن فیلتر مورد نظر برای هندلر است.</p>
+                  <p>در این بخش می خواهیم تنها پیام هایی که در پی وی ربات فرستاده شده به تابع کالبک فرستاده شوند. بنابراین فیلتر ما براحتی و بصورت زیر خواهد بود.</p>
+                  <pre class="nice"><code class="language-cs">var my_filter = Filter.Private;</code></pre>
+                  <p>همانطور که می دانید Private، به معنای چت خصوصی یا پی وی ربات می باشد.</p>
+                  <p>هم اکنون هندلر خود را ساخته و تابع کالبک و فیلتر را به آن پاس می دهیم.</p>
+                  <pre class="nice"><code class="language-cs">var my_handler = new MessageHandler(CallBack, my_filter);</code></pre>
+                  <p>سپس هندلری که ساختیم را بصورت زیر به ربات اضافه می کنیم.</p>
+                  <pre class="nice"><code class="language-cs">bot.AddHandler(my_handler);</code></pre>
+                  <p>خب هندلر ساخته و به ربات اضافه شد. حالا وقت آن است که به آپدیت های ورودی به ربات گوش دهیم.</p>
+                  <p>برای شروع دریافت آپدیت ها از تابع زیر استفاده می کنیم.</p>
+                  <pre class="nice"><code class="language-cs">await bot.Dispatcher();</code></pre>
+                  <p>در نهایت تمامی کد شما باید بصورت ریز باشد.</p>
+                  <pre class="nice"><code class="language-cs">
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Types;
+using Telegram.Filters;
+using Telegram.Handlers;
+
+namespace hello_cs
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var bot = new TelegramBotClient("API_TOKEN");
+
+            var my_filter = Filter.Private;
+            var my_handler = new MessageHandler(CallBack, my_filter);
+
+            bot.AddHandler(my_handler);
+
+            Console.WriteLine($"Hello i'm {bot.BotInfo.FirstName}, my username is {bot.BotInfo.Username}");
+
+            await bot.Dispatcher();
+        }
+
+        private static async Task CallBack(TelegramBotClient bot, Message message, Dictionary&ltstring, dynamic&gt data)
+        {
+            await message.ReplyText($"You said: " + message.Text);
+        }
+    }
+}</code></pre>  
+                  <p>توجه داشته باشید، در کد بالا بایستی توکن ربات خود را جایگزین عبارت API_TOKEN بکنید.</p>
+                  <p>توجه داشته باشید که تعریف تابع Main تغییر کرده است.</p>
+                  <pre class="nice"><code class="language-cs">
+// Old
+static void Main(string[] args)</code></pre>
+<pre class="nice"><code class="language-cs">
+// New
+static async Task Main(string[] args)</code></pre>
+                  <p>مراحل کد نویسی در این مرحله تمام شد. برای اجرای کد خود دستور زیر را در کنسول اجرا کنید:</p>
+                  <div class="terminal" dir="ltr">
+                    dotnet run
+                  </div>
+                  <p>خروجی ای مانند زیر مشاهده خواهید کرد:</p>
+                  <div class="terminal" dir="ltr">
+                    Hello i'm Parasite, my username is Parasiticbot<br />
+                    Getting updates from Parasiticbot (1004758067)
+                  </div>
+                  <p>بگزارید برنامه در حال اجرا بماند.</p>
+                  <p>حالا به ربات خود مراجعه کرده و پیامی را در پی وی ربات بفرستید.</p>
+                  <p>اگر همه چیز را درست انجام داده باشید، ربات جواب شما را خواهد داد.</p>
+                  <p>برای متوقت کردن ربات هنگامی که در کنسول هستید، کلید های ctrl + C  را بفشارید.</p>
+                  <h4>تبریک ربات شما هم اکنون روح دارد.</h4>
                 </div>
               </div>
             </div>
